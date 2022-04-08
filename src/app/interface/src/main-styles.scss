@@ -1,7 +1,8 @@
 
 $purple: #800080;
-$magenta: #D100D1;
+$magenta: #FF5CFF;
 $light: #f8f8f8;
+$dark-purple: #931db0;
 
 $primary: $purple;
 $link: $light;
@@ -9,10 +10,10 @@ $link: $light;
 $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
-$link-color: $light;
+$link: $light;
 
 html {
-    background: linear-gradient(to right top, $magenta, $purple);
+    background: linear-gradient(to right top, $purple, $magenta);
 }
 
 html, body {
