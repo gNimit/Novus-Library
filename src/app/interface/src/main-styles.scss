@@ -1,0 +1,20 @@
+
+$purple: #800080;
+$magenta: #D100D1;
+$light: #f8f8f8;
+
+$primary: $purple;
+$link: $light;
+
+$control-border-width: 2px;
+$input-border-color: transparent;
+$input-shadow: none;
+$link-color: $light;
+
+html {
+    background: linear-gradient(to right top, $magenta, $purple);
+}
+
+html, body {
+    height: 100%;
+}
