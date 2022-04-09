@@ -7,14 +7,22 @@
     align-items: flex-end;
     padding: 5px;
 
+    .search {
+        border-radius: 25px;
+        margin-left: 5px;
+        width: 80px;
+    }
+
     .library  {
         border-radius: 25px;
-        margin-right: 5px;
+        margin-left: 5px;
+        width: 80px;
     }
 
     .contribute {
         border-radius: 25px;
         margin-left: 5px;
+        width: 80px;
     }
     
 }
