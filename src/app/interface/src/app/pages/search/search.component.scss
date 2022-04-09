@@ -1,31 +1,5 @@
 @import "../../../main-styles.scss";
 
-.nav-bar {
-    display: flex;
-    background: linear-gradient(to left top, $purple, $dark-purple);
-    height: 15%;
-    align-items: flex-end;
-    padding: 5px;
-
-    .search {
-        border-radius: 25px;
-        margin-left: 5px;
-        width: 80px;
-    }
-
-    .library  {
-        border-radius: 25px;
-        margin-left: 5px;
-        width: 80px;
-    }
-
-    .contribute {
-        border-radius: 25px;
-        margin-left: 5px;
-        width: 80px;
-    }
-    
-}
 
 .centered-content {
     display: flex;
@@ -41,6 +15,7 @@
         
         .q {
             width: 400%;
+            height: 120%;
             border-radius: 25px;
             margin-top: 50%;
         }

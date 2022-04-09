@@ -1,38 +1,11 @@
 @import "../../../main-styles.scss";
 
-.nav-bar {
-    display: flex;
-    background: linear-gradient(to left top, $purple, $dark-purple);
-    height: 15%;
-    align-items: flex-end;
-    padding: 5px;
-
-    .search {
-        border-radius: 25px;
-        margin-left: 5px;
-        width: 80px;
-    }
-
-    .library  {
-        border-radius: 25px;
-        margin-left: 5px;
-        width: 80px;
-    }
-
-    .contribute {
-        border-radius: 25px;
-        margin-left: 5px;
-        width: 80px;
-    }
-    
-}
-
 
 .content {
     display: flex;
     flex-direction: column;
-    height: 70%;
+    height: 100%;
     align-items: center;
-    background-color: white;
+    background-color: $light;
 
 }

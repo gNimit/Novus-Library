@@ -3,15 +3,23 @@ import dotenv from 'dotenv';
 import { connectMongo } from './dbconnect';
 import {PrintedMaterial} from '../models/printedMaterial';
 import bodyParser from 'body-parser';
+import { saveDataToDataBase } from './csv_parser'
 
 dotenv.config();
-
 connectMongo();
-
+//saveDataToDataBase();
 const app: Express = express();
 const port = process.env.PORT;
 
 app.use(bodyParser.json());
+
+
+//CORS HEADERS MIDDLEWARE
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 app.get( '/items',(req: Request, res: Response) => {
     PrintedMaterial.find({})
@@ -29,8 +37,9 @@ app.post('/add', (req: Request, res: Response) => {
         title: <String>req.body.title,
         isbn: <String>req.body.isbn,
         type: <String>req.body.type,
-        authors: <String>req.body.authors,
-        authors_email: <String>req.body.authors_email,
+        authorFname: <String>req.body.authorFname,
+        authorLname: <String>req.body.authorLname,
+        authors_email: <Object>req.body.authors_email,
         publish_date: <String>req.body.publish_date,
         description: <String>req.body.description
 

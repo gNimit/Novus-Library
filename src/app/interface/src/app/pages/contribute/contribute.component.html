@@ -18,7 +18,7 @@
 <div class = "centered-content">
 
     <div class = "adding-information-to-library">
-        <div class = "sidebar has-background-white">
+        <div class = "sidebar has-background-white-bis">
             <h1 class = "title">Data</h1>
 
             <div class="data-menu">
@@ -34,8 +34,11 @@
                 </a>
                 <a class="data-menu-item"> <p>Description </p>
                 </a>
+                
 
-
+            </div>
+            <div class="submit-button">
+                <button class="button is-primary" (click)="addNewPrintedMaterial()" >Submit</button>
             </div>
 
         </div>
@@ -46,11 +49,20 @@
             <div class="information-menu">
                 
                 <div class="information-menu-item">
-                    <p> Enter Title Here </p>
+                    <textarea class="textarea is-primary" placeholder="Enter Title Here"></textarea>
                 </div>
 
                 <div class="information-menu-item">
-                    <input class = "is-text-area" name = "printed-material-title" type = "text" >
+        
+                        <label class="radio">
+                          <input type="radio" name="answer">
+                          MAGAZINE
+                        </label>
+                        <label class="radio">
+                          <input type="radio" name="answer">
+                          BOOK
+                        </label>
+                     
                 </div>
                 
 
@@ -59,11 +71,12 @@
         
         </div>
     </div>
+
+    
         
 </div>
 
-<div class="submit-button">
-    <button class="is-button"> <p >Submit</p>
-    </button>
-</div>
+
+
+
 

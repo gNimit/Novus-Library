@@ -18,23 +18,28 @@
 <div class = "content">
         
      <div class="printed-material">
-         <div class="material">
-             <p id = "material-title" class = "title"></p>
+         <div class="title">
+             <p id = "material-title" class = "title">{{PrintedMaterial.title}}</p>
          </div>
+         <div class="type">
+            <p id = "material-type" class = "type">{{PrintedMaterial.type}}</p>
+        </div>
          <div class="author">
-             <p id = "author-name" class = "author"></p>
+             <p id = "author-Fname" class = "author">{{PrintedMaterial.authorFname}}</p>
+             <p id = "author-Lname" class = "author">{{PrintedMaterial.authorLname}}</p>
          </div>
          <div class="isbn">
-             <p id = "material-isbn" class = "isbn"></p>
+             <p id = "material-isbn" class = "isbn">{{PrintedMaterial.isbn}}</p>
          </div>
          <div class="email">
-             <p id = "author-email" class = "email"></p>
+             <p id = "author-email" class = "email">{{PrintedMaterial.authorEmail}}</p>
          </div>
          <div class="publish-date">
-             <p id = "material-publish-date" class = "date"></p>
+             <p id = "material-publish-date" class = "date">{{PrintedMaterial.date}}</p>
          </div>
          <div class="description">
-             <p id = "material-description" class = "description"></p>
+             <p id = "material-description" class = "description">{{PrintedMaterial.description}}</p>
          </div>
+         
      </div>
 </div>

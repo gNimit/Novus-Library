@@ -7,6 +7,7 @@ import { SearchComponent } from './pages/search/search.component';
 
 import { ContributeComponent } from './pages/contribute/contribute.component';
 import { LibraryComponent } from './pages/library/library.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LibraryComponent } from './pages/library/library.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

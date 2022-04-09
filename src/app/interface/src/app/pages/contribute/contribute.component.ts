@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WebRequestService } from 'src/app/web-request.service';
 
 @Component({
   selector: 'app-contribute',
@@ -7,7 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContributeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private webRequestService: WebRequestService) { }
+
+  addPrintedMaterial(title: string) {
+      return this.webRequestService.post('add', {title});
+  }
+
+  addNewPrintedMaterial() {
+      this.addPrintedMaterial('Testing').subscribe((response: any) => {
+          console.log(response);
+      });
+  }
+
 
   ngOnInit(): void {
   }

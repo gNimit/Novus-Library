@@ -3,6 +3,7 @@ $purple: #800080;
 $magenta: #FF5CFF;
 $light: #f8f8f8;
 $dark-purple: #931db0;
+$light-grey: #D3D3D3;
 
 $primary: $purple;
 $link: $light;
@@ -18,4 +19,37 @@ html {
 
 html, body {
     height: 100%;
+}
+
+.nav-bar {
+    display: flex;
+    background: linear-gradient(to left top, $purple, $dark-purple);
+    height: 15%;
+    align-items: flex-end;
+    padding: 5px;
+
+    .search {
+        border-radius: 25px;
+        margin-left: 5px;
+        width: 80px;
+        background-color: white;
+        color: purple;
+    }
+
+    .library  {
+        border-radius: 25px;
+        margin-left: 5px;
+        width: 80px;
+        background-color: white;
+        color: purple;
+    }
+
+    .contribute {
+        border-radius: 25px;
+        margin-left: 5px;
+        width: 80px;
+        background-color: white;
+        color: purple;
+    }
+    
 }
