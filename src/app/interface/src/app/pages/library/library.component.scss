@@ -6,6 +6,27 @@
     flex-direction: column;
     height: 100%;
     align-items: center;
-    background-color: $light;
+    background-color: white;
+
+    .printed-material {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background-color: white;
+
+        .table {
+            margin-top: 20px;
+            .table-row {
+                .table-headings {
+                    background-color: $light;
+                }
+                .table-items {
+                    color: $purple;
+                    font-size: 14px;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
 
 }

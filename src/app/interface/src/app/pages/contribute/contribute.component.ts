@@ -18,7 +18,7 @@ export class ContributeComponent implements OnInit {
 
       console.log(data);
       let name = data.authorName.split(",");
-      let Fname, Lname;
+      let Fname: string = "", Lname: string = "";
 
       for(const key in name) {
           const fullName = name[key].split(" ");
@@ -26,7 +26,12 @@ export class ContributeComponent implements OnInit {
           Lname += fullName[1];  
       }
 
+      
       let email = data.authorEmail.split(",")
+      let authors_email: string = "";
+      for (const key in email) {
+          authors_email += email[key];
+      }
       
       let PrintedMaterial = {
         title: data.itemTitle,
@@ -34,8 +39,8 @@ export class ContributeComponent implements OnInit {
         type: data.itemType,
         authorFname: Fname,
         authorLname: Lname,
-        authors_email: email,
-        published_date: data.itemPublishedAt,
+        authors_email: authors_email,
+        publish_date: data.itemPublishedDate,
         description: data.itemDescription
       }
 

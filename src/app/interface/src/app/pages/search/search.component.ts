@@ -10,12 +10,15 @@ export class SearchComponent implements OnInit {
 
   constructor(private webRequestService: WebRequestService) { }
 
-  searchDatabase() {
-    return this.webRequestService.get('items');
+  searchDatabase(title: string) {
+    return this.webRequestService.get(`search/${title}`);
   }
 
-  searchDatabaseItems(searchValue: string) {
-    this.searchDatabase();
+  searchDatabaseItems(search: string) {
+    
+    let searchQuery = search;
+    this.searchDatabase(search).subscribe(response => {});
+    console.log('front working....');
   }
 
   ngOnInit(): void {

@@ -17,8 +17,9 @@
 <div class="centered-content">
         
     <div class="search-bar">
-        <input #searchInput class = "q" name = "q" type = "text"  >
-        <button class = "search-button" name = "search-button" (click)= "searchDatabaseItems(searchInput.value)"> Search</button>
+        <input #searchQuery class = "q" name = "q" type = "text" placeholder = "Your Search Query Here"  >
+        <button class = "search-button" name = "search-button" (click)= "searchDatabaseItems(searchQuery.value)"> 
+        Search</button>
     </div>
      
 </div>
