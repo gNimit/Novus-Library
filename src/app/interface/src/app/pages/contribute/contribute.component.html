@@ -37,36 +37,47 @@
                 
 
             </div>
-            <div class="submit-button">
-                <button class="button is-primary" (click)="addNewPrintedMaterial()" >Submit</button>
-            </div>
+            
 
         </div>
 
         <div class = "information-panel has-background-light" >
             <h1 class = "title">Enter Information</h1>
             
-            <div class="information-menu">
-                
-                <div class="information-menu-item">
-                    <textarea class="textarea is-primary" placeholder="Enter Title Here"></textarea>
-                </div>
+                <div class="information-menu">
+                        
+                    <form #itemInformation = "ngForm" (submit)="addNewPrintedMaterial(itemInformation.value)">
+                        
+                        <div class="information-menu-item">
+                            <input type = "text" ngModel name = "itemTitle" class="input is-primary" placeholder="Enter Title Here">
+                            <input type = "text" ngModel name = "itemType" class = "input is-primary" style="margin-left: 2px; max-width: 200px;" placeholder="Type" >
+                        </div>
+                        
+                        <div class="information-menu-item">
+                            <input type = "text" ngModel name = "authorName" class="input is-primary" placeholder="Enter Author(s) name here seperated by comma" >
+                        </div>
 
-                <div class="information-menu-item">
-        
-                        <label class="radio">
-                          <input type="radio" name="answer">
-                          MAGAZINE
-                        </label>
-                        <label class="radio">
-                          <input type="radio" name="answer">
-                          BOOK
-                        </label>
-                     
-                </div>
-                
+                        <div class="information-menu-item">
+                            <input type = "text" ngModel name = "authorEmail" class="input is-primary" placeholder="Enter Email of Author(s) seperated by comma" >
+                        </div>
+                        
+                        <div class="information-menu-item">
+                            <input type = "text" ngModel name = "itemIsbn" class="input is-primary" placeholder="Enter ISBN of book or magazine here" >
+                        </div>
 
+                        <div class="information-menu-item">
+                            <input type = "text" ngModel name = "itemPublishedAt" class="input is-primary" placeholder="Enter Published Date here" >
+                        </div>
 
+                        <div class="information-menu-item">
+                            <textarea type = "text" ngModel name = "itemDescription" class="textarea is-primary" placeholder="Enter Description Here" ></textarea>
+                        </div>
+
+                        <div class="submit-button">
+                            <button class="button is-primary" >Submit</button>
+                        </div>
+
+                    </form>
             </div>
         
         </div>

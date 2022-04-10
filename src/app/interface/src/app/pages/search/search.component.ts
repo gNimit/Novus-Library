@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WebRequestService } from 'src/app/web-request.service';
 
 @Component({
   selector: 'app-search',
@@ -7,7 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  constructor() { }
+  constructor(private webRequestService: WebRequestService) { }
+
+  searchDatabase() {
+    return this.webRequestService.get('items');
+  }
+
+  searchDatabaseItems(searchValue: string) {
+    this.searchDatabase();
+  }
 
   ngOnInit(): void {
   }

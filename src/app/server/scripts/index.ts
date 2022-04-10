@@ -37,8 +37,8 @@ app.post('/add', (req: Request, res: Response) => {
         title: <String>req.body.title,
         isbn: <String>req.body.isbn,
         type: <String>req.body.type,
-        authorFname: <String>req.body.authorFname,
-        authorLname: <String>req.body.authorLname,
+        authorFname: <Object>req.body.authorFname,
+        authorLname: <Object>req.body.authorLname,
         authors_email: <Object>req.body.authors_email,
         publish_date: <String>req.body.publish_date,
         description: <String>req.body.description
@@ -47,7 +47,7 @@ app.post('/add', (req: Request, res: Response) => {
     try {
         const savedData = printedMaterialData.save();
         res.status(200).json(savedData);
-        console.log(savedData);
+        console.log(`[MongoDB]: Data Saved! ${printedMaterialData}`);
     } catch(err) {
         res.status(400).send(err);
         console.log(`[POST]: POST ERROR ${err}`);
