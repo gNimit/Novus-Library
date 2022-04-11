@@ -62,14 +62,14 @@ function saveDataToDataBase() {
                     publish_date: printed_material.publish_date,
                     description: printed_material.description
             
-                });
+                });/*
                 try {
                     const savedData = printedMaterialData.save();
                     console.log(savedData);
                 } catch(err) {
                     console.log(`[ERROR]: Could not save data from csv to database :  ${err}`);
                 }
-
+*/
                 console.log("-------------------------");
                 console.log(printed_material.title);
                 console.log(printed_material.isbn);

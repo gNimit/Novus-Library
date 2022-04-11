@@ -15,7 +15,7 @@ const port = process.env.PORT;
 
 connectMongo();
 
-//saveDataToDataBase();
+saveDataToDataBase();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
