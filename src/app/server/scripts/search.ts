@@ -13,12 +13,10 @@ router.use((req: Request, res: Response, next) => {
     next();
 })
 
-router.get('/:id', (req: Request, res: Response, next) => {
+router.get('/search/:id', (req: Request, res: Response, next) => {
     console.log('working......')  
 
     let value = req.params.id;
-    //let author = req.query.authors_email;
-    //let isbn = req.query.isbn;
     
     try {
 
@@ -38,6 +36,21 @@ router.get('/:id', (req: Request, res: Response, next) => {
     }
 });
 
+
+router.get('/sort/:id', (req: Request, res: Response, next) => {
+
+    let query = req.params.id;
+   
+    
+    PrintedMaterial.find().sort({[query]: 1}).exec(function(err, data) {
+        if (err) {
+            console.log(`[SORT ERROR]: Error whiel Sorting ${err}`)
+        } else {
+            console.log(`SORT RESULTS..................................: ${data}`)
+            res.send(data);
+        }
+    });
+})
 
 export {router};
 

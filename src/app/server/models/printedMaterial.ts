@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
+import {Document, Model} from 'mongoose';
 import { prependListener } from 'process';
 
-interface printed_material {
+export interface printed_material {
 
     title: String;
     isbn: String;
@@ -13,13 +14,10 @@ interface printed_material {
     description: String;
 }
 
-interface search_query {
-    searhquery: String;
+interface UserModel extends Model<printed_material> {
+    myStaticMethod(): number;
 }
 
-interface sort_query {
-
-}
 
 const materialSchema = new mongoose.Schema<printed_material> ({
     title: { type: String, required: false, unique: true },
@@ -31,11 +29,13 @@ const materialSchema = new mongoose.Schema<printed_material> ({
     publish_date: { type: String, required: false },
     description: { type: String, required: false }
 });
+materialSchema.static('myStaticMethod', function myStaticMethod() {
+    return 42;
+});
 
 
-
-const PrintedMaterial = mongoose.model('PrintedMaterial', materialSchema);
-
+const PrintedMaterial = mongoose.model<printed_material, UserModel>('PrintedMaterial', materialSchema);
+const answer: number  = PrintedMaterial.myStaticMethod();
 
 export {
     PrintedMaterial

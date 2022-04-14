@@ -11,7 +11,7 @@ export class printedMaterial {
     public authorFname: string,
     public authorLname: string,
     public authors_email: string,
-    public publishedAt: string,
+    public publish_date: string,
     public description: string
   
   ) {}
@@ -48,8 +48,57 @@ export class LibraryComponent implements OnInit {
 
   }
 
+  sortByTitle() {
+      
+      let query = "title";
+      let dropdown_item = document.querySelector('.dropdown-item');
+      let value = false;
+      
+      dropdown_item?.addEventListener('click', function(event) {
+          event.stopPropagation();
+          
+          if (!value) {
+              dropdown_item?.classList.toggle('is-active');
+          } else {
+              dropdown_item?.classList.toggle('');
+          }
+
+      });
+      
+      this.sortPrintedMaterial(query);
+  }
+
+  sortByAuthor() {
+      let query = "authorFname";
+      let dropdown_item = document.querySelector('.dropdown-item');
+      let value = false;
+      
+      dropdown_item?.addEventListener('click', function(event) {
+          event.stopPropagation();
+          
+          if (!value) {
+            dropdown_item?.classList.toggle('is-active');
+          } else {
+            dropdown_item?.classList.toggle('');
+          }
+      });
+      
+      this.sortPrintedMaterial(query);;
+  }
+
+
+  sortPrintedMaterial(query: string) {
+
+    this.webRequestService.get(`sort/${query}`).subscribe(response => {
+        console.log(response);
+        this.items = response;
+        //location.reload();
+    });
+  }
+
   getPrintedMaterial() {
-      return this.webRequestService.get('items');
+      
+      return this.webRequestService.get(`items`);
   }
 
   getNewPrintedMaterial() { 
@@ -60,9 +109,20 @@ export class LibraryComponent implements OnInit {
     }) 
   
   }
+
+  reloadPage() {
+    this.getNewPrintedMaterial();
+  }
   
   ngOnInit(): void {
     //this.getNewPrintedMaterial();
+
+    var dropdown = document.querySelector('.dropdown');
+  
+    dropdown?.addEventListener('click', function(event) {
+        event.stopPropagation();
+        dropdown?.classList.toggle('is-active');
+    });
   }
   
 }

@@ -1,18 +1,39 @@
 @import "../../../main-styles.scss";
 
+html {
+    background: white;
+}
+
+
+.nav-bar {
+
+    .sort-button {
+        border-radius: 25px;
+        margin-left: 5px;
+        margin-top: 2px;
+        width: 80px;
+        height: 22px;
+        background-color: white;
+        color: purple;
+
+        .dropdown-item {
+            color: $purple;
+        }
+    }
+}
+
+
 
 .content {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 80%;
     align-items: center;
-    background-color: white;
 
     .printed-material {
         display: flex;
         flex-direction: column;
         width: 100%;
-        background-color: white;
 
         .table {
             margin-top: 20px;

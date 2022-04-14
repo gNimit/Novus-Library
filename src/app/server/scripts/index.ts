@@ -1,11 +1,11 @@
-import express, {Express, Request, Response, Router} from 'express';
+import express, {Express, Request, Response, Router, query} from 'express';
 import dotenv from 'dotenv';
 import { connectMongo } from './dbconnect';
 import {PrintedMaterial} from '../models/printedMaterial';
 import bodyParser from 'body-parser';
-import { saveDataToDataBase } from './csv_parser';
+import { parseCSVFiles } from './csv_parser';
 import url from 'url';
-import { router } from './search_sort'; 
+import { router } from './search'; 
 
 dotenv.config();
 
@@ -15,7 +15,7 @@ const port = process.env.PORT;
 
 connectMongo();
 
-saveDataToDataBase();
+//parseCSVFiles();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -28,8 +28,9 @@ app.use(function(req: Request, res: Response, next) {
     next();
 });
 
-app.get( '/items',(req: Request, res: Response) => {
-    PrintedMaterial.find({})
+app.get( '/items',(req: Request, res: Response, next) => {
+    
+    PrintedMaterial.find()
     .then((items) => {
         res.send(items);
     })
@@ -39,7 +40,7 @@ app.get( '/items',(req: Request, res: Response) => {
 
 
 app.post('/add', (req: Request, res: Response) => {
-
+    
     let printedMaterialData = new PrintedMaterial({
         title: <String>req.body.title,
         isbn: <String>req.body.isbn,
@@ -62,7 +63,7 @@ app.post('/add', (req: Request, res: Response) => {
 
 });
 
-app.use('/search', router);
+app.use('', router);
 
 app.listen( port, () => {
     console.log(`[server]: server is running at https://localhost:${port}`);
