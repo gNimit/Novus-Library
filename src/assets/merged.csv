@@ -1,0 +1,55 @@
+"{
+  _id: new ObjectId(""6257afe750eec4add7b4ba55""),
+  title: 'Schuhbecks Kochschule. Kochen lernen mit Alfons Schuhbeck ',
+  isbn: '1215-4545-5895',
+  type: 'books',
+  authorFname: 'Max ,',
+  authorLname: 'Müller , ',
+  authors_email: 'null-walter@echocat.org',
+  description: 'Aller Anfang ist leicht! Zumindest, wenn man beim Kochenlernen einen Lehrer wie Alfons Schuhbeck zur Seite hat. Mit seiner Hilfe kann auch der ungeschickteste Anfänger beste Noten für seine Gerichte bekommen. Der Trick, den der vielfach ausgezeichnete Meisterkoch dabei anwendet, lautet visualisieren. Die einzelnen Arbeitsschritte werden auf Farbfotos im Format von ca. 3x4 cm abgebildet. Unter diesen stehen kurz und knapp die Angaben zur Zubereitung. So präsentiert Schuhbecks Kochschule alles bequem auf einen Blick. Und der interessierte Kochneuling kann sich auf die Hauptsache konzentrieren – aufs Kochen. Wie die Speise aussehen soll, zeigt jeweils das Farbfoto auf der linken Seite, auf der auch die Zutaten – dank des geschickten Layouts – ebenfalls sehr übersichtlich aufgelistet sind. Außerdem gibt Schuhbeck prägnante Empfehlungen zu Zutaten und Zubereitung.',
+  __v: 0
+}","{
+  _id: new ObjectId(""6257b498cc930808f16b1d85""),
+  title: 'Mangi',
+  isbn: '1239847899343',
+  type: 'magazine',
+  authorFname: 'Manus',
+  authorLname: 'undefined',
+  authors_email: 'manus@ds.com',
+  publish_date: '20.12.12',
+  description: 'Description.....',
+  __v: 0
+}","{
+  _id: new ObjectId(""6257b897cc930808f16b1d8f""),
+  title: 'Acsii',
+  isbn: '837201934',
+  type: 'Book',
+  authorFname: 'Almond',
+  authorLname: 'undefined',
+  authors_email: 'almond@al.com',
+  publish_date: '20.12.12',
+  description: 'Temp Book',
+  __v: 0
+}","{
+  _id: new ObjectId(""6257b8f2cc930808f16b1d96""),
+  title: 'aarro',
+  isbn: '298339712',
+  type: 'magazine',
+  authorFname: 'zelda',
+  authorLname: 'undefined',
+  authors_email: 'zelda@com',
+  publish_date: '20.12.12',
+  description: 'temp subject',
+  __v: 0
+}","{
+  _id: new ObjectId(""6257dffd62bd731504af1657""),
+  title: 'Test ',
+  isbn: '12323598934343',
+  type: 'Book',
+  authorFname: 'Nimit',
+  authorLname: 'Gaur',
+  authors_email: 'test@email.com',
+  publish_date: '20.12.12',
+  description: 'Test Run',
+  __v: 0
+}"

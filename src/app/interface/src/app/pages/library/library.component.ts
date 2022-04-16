@@ -96,6 +96,12 @@ export class LibraryComponent implements OnInit {
     });
   }
 
+  saveToCsv() {
+    this.webRequestService.get(`save`).subscribe(response => {
+        console.log(response);
+    });
+  }
+
   getPrintedMaterial() {
       
       return this.webRequestService.get(`items`);

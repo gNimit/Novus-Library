@@ -3,9 +3,8 @@ import dotenv from 'dotenv';
 import { connectMongo } from './dbconnect';
 import {PrintedMaterial} from '../models/printedMaterial';
 import bodyParser from 'body-parser';
-import { parseCSVFiles } from './csv_parser';
-import url from 'url';
 import { router } from './search'; 
+import { save } from './writeCSV';
 
 dotenv.config();
 
@@ -64,6 +63,7 @@ app.post('/add', (req: Request, res: Response) => {
 });
 
 app.use('', router);
+app.use('', save);
 
 app.listen( port, () => {
     console.log(`[server]: server is running at https://localhost:${port}`);
