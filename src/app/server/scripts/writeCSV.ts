@@ -6,28 +6,14 @@ import { PrintedMaterial } from '../models/printedMaterial';
 
 const save = express.Router();
 
-
-let writeData = {
-    title: String,
-    isbn: String,
-    type: String,
-    authorFname: String,
-    authorLname: String,
-    authorEmail: String,
-    publishDate: String,
-    description: String,
-}
-
-save.get('/save', (req: Request, res: Response, next) => {
-    console.log('working......')  
-
+function writeToFile() {
+    
     PrintedMaterial.find((err, data) => {
         if (err) {
             console.log(`[ERROR]: There was an error ${err}`);
-            res.status(500).json({err});
         
         } else {
-            res.send(data);
+            
             csv.writeToPath(path.resolve('../../assets', 'merged.csv'), [data])
             .on('error', err => console.log(err))
             .on('finish', () => {
@@ -37,7 +23,22 @@ save.get('/save', (req: Request, res: Response, next) => {
             });
         }
     });
+}
 
+
+save.get('/file', (req: Request, res: Response, next) => {
+    
+    writeToFile();
+
+    res.download('../../assets/merged.csv', (err) => {
+        if(err) {
+            console.log(`[ERROR]: Error while downloading file ${err}`);
+            res.status(500).send({
+                message: "Could not download the file. " + err,
+            });
+        }
+    });
+ 
 });
 
 export {save}

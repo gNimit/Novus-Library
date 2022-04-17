@@ -1,6 +1,9 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-dotenv.config({path: '../.env'});
+dotenv.config();
+
+const URI = process.env.MONGO_ATLAS_URI;
+
 
 function connectMongo() {
     mongoose.connect( `${process.env.MONGO_ATLAS_URI}`)
@@ -12,6 +15,5 @@ function connectMongo() {
         console.log(`[Mongoose]: ${err}`);
     });
 }
-
-export {connectMongo};
+export { connectMongo };
 

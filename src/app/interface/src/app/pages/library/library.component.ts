@@ -97,9 +97,8 @@ export class LibraryComponent implements OnInit {
   }
 
   saveToCsv() {
-    this.webRequestService.get(`save`).subscribe(response => {
-        console.log(response);
-    });
+    this.webRequestService.get(`file`);
+    window.open('http://localhost:8000/file')
   }
 
   getPrintedMaterial() {

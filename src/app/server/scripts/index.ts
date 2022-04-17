@@ -1,7 +1,8 @@
 import express, {Express, Request, Response, Router, query} from 'express';
 import dotenv from 'dotenv';
 import { connectMongo } from './dbconnect';
-import {PrintedMaterial} from '../models/printedMaterial';
+import { PrintedMaterial } from '../models/printedMaterial';
+import { parseCSVFiles } from './csv_parser';
 import bodyParser from 'body-parser';
 import { router } from './search'; 
 import { save } from './writeCSV';
@@ -10,11 +11,10 @@ dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT;
-
+const parse: parseCSVFiles = new parseCSVFiles();
 
 connectMongo();
-
-//parseCSVFiles();
+parse.callParsingMethods();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -28,10 +28,11 @@ app.use(function(req: Request, res: Response, next) {
 });
 
 app.get( '/items',(req: Request, res: Response, next) => {
-    
+        
     PrintedMaterial.find()
     .then((items) => {
         res.send(items);
+        console.log(items);
     })
     .catch(err => res.status(400).json(`[GET]: GET ERROR: ${err}`));
 

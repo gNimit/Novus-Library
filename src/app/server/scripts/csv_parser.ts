@@ -2,31 +2,38 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as csv from 'fast-csv';
 import {PrintedMaterial} from '../models/printedMaterial';
-let files = ['authors.csv','books.csv','magazines.csv'];
+
+export interface Data {
+        
+        title?: string,
+        isbn?: string,
+        type?: string,
+        authorFname?: string,
+        authorLname?: string,
+        authorEmail?: string,
+        publishDate?: string,
+        description?: string,
+}
 
 
+export class parseCSVFiles  {
 
+    private csvData: Data;
 
-function parseCSVFiles() {
-    
-
-    parseMaterial('magazines.csv', 'authors.csv');
-    parseMaterial('books.csv', 'authors.csv', );
- 
-    let csvData = {
-
-        title: "",
-        isbn: "",
-        type: "",
-        authorFname: "",
-        authorLname: "",
-        authorEmail: "",
-        publishDate: "",
-        description: "",
+    constructor() {
+        this.csvData = {};
     }
 
+    files = ['authors.csv','books.csv','magazines.csv'];
 
-    function parseAuthor(fileAuthor: string, AuthorsEmail: string) {
+   
+    callParsingMethods() : void {
+
+        this.parseMaterial('magazines.csv', 'authors.csv');
+        this.parseMaterial('books.csv', 'authors.csv', );
+    }
+    
+    parseAuthor(fileAuthor: string, AuthorsEmail: string, itemTitle: string) : void {
 
         let authorsEmails = AuthorsEmail.split(",");
         let fname = new Array(authorsEmails.length);
@@ -42,11 +49,13 @@ function parseCSVFiles() {
 
                     
                     for(let i = 0; i < Object.keys(authorsEmails).length; i++) {
+                        
                         if (authorsEmails[i] == row.email) {   
-                            
+                            let value = true;
                             fname[i] = row.firstname;
                             lname[i] = row.lastname;
-                            save(fname, lname);            
+                            this.saveAuthorToDB(fname, lname, itemTitle);
+                            //console.log(this.csvData.title);
                     
                         }
                     }
@@ -54,76 +63,115 @@ function parseCSVFiles() {
                 })          
                 
     }
+    
+    
+    
+    parseMaterial(fileMaterial: string, fileAuthor: string) : void {
 
-    let save: (arg0: any[], arg1: any[]) => void;
-    function parseMaterial(fileMaterial: string, fileAuthor: string) {
-
+        //
         fs.createReadStream(path.resolve('../../assets', fileMaterial))
             .pipe(csv.parse({ delimiter:';', headers: true }))
             .on('error', error => console.error(error))
             .on('data', row => {
-
-                csvData.title = row.title;
-                csvData.isbn = row.isbn;
-                csvData.authorEmail = row.authors;
-                csvData.type = fileMaterial.replace('.csv', '');
-                csvData.publishDate = row.publishedAt;
-                csvData.description = row.description;
                 
-                function saveToDB(fname: any, lname: any) {
-                    
-                    csvData.authorFname = "";
-                    csvData.authorLname = "";
-                    let value = true;
-                    
-                    for (let i = 0; i < fname.length; i++ ) {
-                        if (fname[i] == null) {
-                            value = false;
-                        }
-                    }
-
-                    if (value == true) {
-                        
-                        for(let i = 0; i < fname.length; i++) {
-                            csvData.authorFname += fname[i] + " ,";
-                            csvData.authorLname += lname[i] + " , ";
-                        }
-                        
-                        console.log(csvData);
-                        /*
-                        let printedMaterialData = new PrintedMaterial({
-                            title: <String>csvData.title,
-                            isbn: <String>csvData.isbn,
-                            type: <String>csvData.type,
-                            authorFname: <String>csvData.authorFname,
-                            authorLname: <String>csvData.authorLname,
-                            authors_email: <String>csvData.authorEmail,
-                            publish_date: <String>csvData.publishDate,
-                            description: <String>csvData.description
-                        
-                        });
-                        
-                        try {
-                            const savedData = printedMaterialData.save();
-                            console.log(savedData);
-                        } catch(err) {
-                            console.log(`[ERROR]: Could not save data from csv to database :  ${err}`);
-                        }
-                      */  
-                    
-                    }
-                }
-                save = saveToDB;
-                parseAuthor(fileAuthor, row.authors);         
-                
+                this.csvData.title = row.title;
+                this.csvData.isbn = row.isbn;
+                this.csvData.authorFname = "";
+                this.csvData.authorLname = "";
+                this.csvData.authorEmail = row.authors;
+                this.csvData.type = fileMaterial.replace('.csv', '');
+                this.csvData.publishDate = row.publishedAt;
+                this.csvData.description = row.description;
+                this.saveItemToDB();
+        
+                this.parseAuthor(fileAuthor, row.authors, row.title);           
             })
 
     }
-/*
-    function saveToDB(fname: any, lname: any) {
+
+    saveItemToDB() {
+                   
+            
+        let printedMaterialData = new PrintedMaterial({
+                
+            title: <String>this.csvData.title,
+            isbn: <String>this.csvData.isbn,
+            type: <String>this.csvData.type,
+            authorFname: <String>this.csvData.authorFname,
+            authorLname: <String>this.csvData.authorLname,
+            authors_email: <String>this.csvData.authorEmail,
+            publish_date: <String>this.csvData.publishDate,
+            description: <String>this.csvData.description
+            
+        });
+            
+            
+        PrintedMaterial.find({title: this.csvData.title}, (err, result) => {
+            if (err) {
+                console.log(`[ERROR]: ${err}`);  
+            
+            } else if (Object.keys(result).length != 0) {
+                
+                console.log("[MongoDB]: Data already saved");
+            
+            } else {
+
+                const savedData = printedMaterialData.save((err, result) => {
+                    if (err) {
+                        console.log(`[ERROR]: Could not save data from csv to database :  ${err}`);
+                    
+                    } else {
+                        console.log(`[MongoDB]: Data Saved ${result}`);
+                    }
+                });
+                console.log(savedData);
+                
+            } 
+        });
         
     }
-    */
-}
+  
 
-export {parseCSVFiles};
+    saveAuthorToDB(fname: any, lname: any, itemTitle: any) {
+               
+        this.csvData.authorFname = "";
+        this.csvData.authorLname = "";
+        let value = true;
+        
+        for (let i = 0; i < fname.length; i++ ) {
+            if (fname[i] == null) {
+                value = false;
+            }
+        }
+
+        if (value == true) {
+            
+            for(let i = 0; i < fname.length; i++) {
+                this.csvData.authorFname += fname[i];
+                this.csvData.authorLname += lname[i];
+                
+                if (i < fname.length-1) {
+                    this.csvData.authorFname += " , ";
+                    this.csvData.authorLname += " , "; 
+                }
+            }
+ 
+            const filter = {title: itemTitle};
+            const update = {authorFname: this.csvData.authorFname, authorLname: this.csvData.authorLname};
+            
+            PrintedMaterial.findOneAndUpdate(filter, update, (err: any, result: any) => {
+                
+                if (err) {
+                    console.log(`[ERROR]: ${err}`);
+                
+                } else {
+
+                    console.log(`[Data Updated]: ${result}`);
+                }
+            
+            });
+                         
+        }
+
+    }
+}

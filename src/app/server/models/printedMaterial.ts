@@ -38,5 +38,6 @@ const PrintedMaterial = mongoose.model<printed_material, UserModel>('PrintedMate
 const answer: number  = PrintedMaterial.myStaticMethod();
 
 export {
-    PrintedMaterial
+    PrintedMaterial,
+    
 }
