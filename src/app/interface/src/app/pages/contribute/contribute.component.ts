@@ -10,10 +10,12 @@ export class ContributeComponent implements OnInit {
 
   constructor(private webRequestService: WebRequestService) { }
 
+  // Function for calling POST Request
   addPrintedMaterial(data: object) {
       return this.webRequestService.post('add', data);
   }
 
+  // Take data from HTML page and send it to server using POST Request to save in database.
   addNewPrintedMaterial(data: any) {
 
       console.log(data);

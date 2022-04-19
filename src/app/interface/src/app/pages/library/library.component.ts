@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { WebRequestService } from 'src/app/web-request.service';
-import {  ActivatedRoute, NavigationExtras, NavigationStart, Router } from '@angular/router';
-import { Observable, observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
 
 export class printedMaterial {
   constructor(
@@ -23,11 +24,15 @@ export class printedMaterial {
   templateUrl: './library.component.html',
   styleUrls: ['./library.component.scss']
 })
+
+
 export class LibraryComponent implements OnInit {
 
   currentSatate$!: Observable<any>;
   items: printedMaterial[] = [];
   
+  // [constructor]: Check if current navigation is from search page and convert data to array. If not get 
+  //  data from the database.
   constructor(private webRequestService: WebRequestService, public router: Router, public route: ActivatedRoute) {
     
     let data = this.router.getCurrentNavigation()?.extras.state?.['data'];
@@ -48,6 +53,7 @@ export class LibraryComponent implements OnInit {
 
   }
 
+  // Sort by title option, Highlight option if inactive and pass query to sorting function.
   sortByTitle() {
       
       let query = "title";
@@ -68,6 +74,8 @@ export class LibraryComponent implements OnInit {
       this.sortPrintedMaterial(query);
   }
 
+
+  // Sort by Author option, highlight if inactive and pass query to sorting function
   sortByAuthor() {
       let query = "authorFname";
       let dropdown_item = document.querySelector('.dropdown-item');
@@ -87,25 +95,31 @@ export class LibraryComponent implements OnInit {
   }
 
 
+  // Send GET request to sort all items displayed in library according to query.
   sortPrintedMaterial(query: string) {
 
     this.webRequestService.get(`sort/${query}`).subscribe(response => {
         console.log(response);
         this.items = response;
-        //location.reload();
+
     });
   }
 
+
+  // Function to call GET function and download merged csv file.
   saveToCsv() {
     this.webRequestService.get(`file`);
     window.open('http://localhost:8000/file')
   }
+
+
 
   getPrintedMaterial() {
       
       return this.webRequestService.get(`items`);
   }
 
+  // GET request for requesting all documents from database and display in libraray.
   getNewPrintedMaterial() { 
 
     this.getPrintedMaterial().subscribe(response  => {
@@ -120,8 +134,8 @@ export class LibraryComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    //this.getNewPrintedMaterial();
 
+    // change behaviour of dropdown sort menu from hover to active on click.
     var dropdown = document.querySelector('.dropdown');
   
     dropdown?.addEventListener('click', function(event) {

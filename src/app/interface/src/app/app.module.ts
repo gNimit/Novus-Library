@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SearchComponent } from './pages/search/search.component';
+import {HttpClientModule} from '@angular/common/http';
 
+import { SearchComponent } from './pages/search/search.component';
 import { ContributeComponent } from './pages/contribute/contribute.component';
 import { LibraryComponent } from './pages/library/library.component';
-import {HttpClientModule} from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
