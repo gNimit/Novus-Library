@@ -10,7 +10,7 @@ import { save } from './writeCSV';
 dotenv.config();
 
 const app: Express = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 8080;
 const parse: parseCSVFiles = new parseCSVFiles();
 
 connectMongo();
