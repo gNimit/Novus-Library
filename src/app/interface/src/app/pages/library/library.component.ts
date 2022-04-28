@@ -109,7 +109,7 @@ export class LibraryComponent implements OnInit {
   // Function to call GET function and download merged csv file.
   saveToCsv() {
     this.webRequestService.get(`file`);
-    window.open('http://localhost:8000/file')
+    window.open('http://ec2-34-238-43-48.compute-1.amazonaws.com/api/file')
   }
 
 
